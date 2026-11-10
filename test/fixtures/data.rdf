@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:schema="https://schema.org/"
+         xmlns:ex="http://example.org/">
+  <schema:CreativeWork rdf:about="http://example.org/good">
+    <schema:name xml:lang="en">A good work</schema:name>
+    <ex:note>not looked at by the shapes</ex:note>
+    <schema:associatedMedia>
+      <rdf:Description rdf:about="http://example.org/m1">
+        <schema:contentUrl rdf:resource="https://example.org/m1.jpg"/>
+        <schema:license rdf:resource="https://creativecommons.org/publicdomain/zero/1.0/"/>
+      </rdf:Description>
+    </schema:associatedMedia>
+  </schema:CreativeWork>
+  <schema:CreativeWork rdf:about="http://example.org/bad">
+    <ex:note>no name, and media with a literal URL and no license</ex:note>
+    <schema:associatedMedia>
+      <rdf:Description rdf:about="http://example.org/m2">
+        <schema:contentUrl>https://example.org/m2.jpg</schema:contentUrl>
+      </rdf:Description>
+    </schema:associatedMedia>
+  </schema:CreativeWork>
+</rdf:RDF>

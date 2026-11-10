@@ -1,0 +1,64 @@
+@prefix sh:     <http://www.w3.org/ns/shacl#> .
+@prefix ex:     <http://example.org/> .
+@prefix schema: <https://schema.org/> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+
+# Flat (non-nested) report, as pyshacl and rdf-validate-shacl tend to write it.
+
+ex:report a sh:ValidationReport ;
+    sh:conforms false ;
+    sh:result ex:r1, ex:r2, ex:r3, ex:r4, ex:r5 .
+
+ex:r1 a sh:ValidationResult ;
+    sh:focusNode ex:a ;
+    sh:resultPath schema:name ;
+    sh:value "x </script><b>bold</b>"@en ;
+    sh:resultSeverity sh:Violation ;
+    sh:sourceConstraintComponent sh:MinLengthConstraintComponent ;
+    sh:sourceShape ex:NameShape ;
+    sh:resultMessage "Too short </script><img src=x onerror=alert(1)>"@en , "Te kort"@nl .
+
+# No severity (defaults to sh:Violation), no message, inverse path, typed value.
+ex:r2 a sh:ValidationResult ;
+    sh:focusNode ex:a ;
+    sh:resultPath [ sh:inversePath schema:isPartOf ] ;
+    sh:value 42 ;
+    sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+    sh:sourceShape ex:NameShape .
+
+# Sequence path and a nested sh:detail result.
+ex:r3 a sh:ValidationResult ;
+    sh:focusNode ex:b ;
+    sh:resultPath ( schema:author schema:name ) ;
+    sh:resultSeverity sh:Warning ;
+    sh:sourceConstraintComponent sh:NodeConstraintComponent ;
+    sh:sourceShape ex:AuthorShape ;
+    sh:resultMessage "Author does not conform"@en ;
+    sh:detail ex:d1 .
+
+ex:d1 a sh:ValidationResult ;
+    sh:focusNode ex:author1 ;
+    sh:resultPath schema:name ;
+    sh:resultSeverity sh:Info ;
+    sh:sourceConstraintComponent sh:MinCountConstraintComponent ;
+    sh:resultMessage "Name is missing"@en .
+
+# Alternative path with a nested zero-or-more; same message set as r1 (dictionary dedup).
+ex:r4 a sh:ValidationResult ;
+    sh:focusNode ex:b ;
+    sh:resultPath [ sh:alternativePath ( schema:name [ sh:zeroOrMorePath schema:alternateName ] ) ] ;
+    sh:resultSeverity sh:Info ;
+    sh:sourceConstraintComponent sh:MinLengthConstraintComponent ;
+    sh:sourceShape ex:NameShape ;
+    sh:resultMessage "Te kort"@nl , "Too short </script><img src=x onerror=alert(1)>"@en .
+
+# Custom severity, no path (node shape), blank focus node, SPARQL source constraint.
+ex:r5 a sh:ValidationResult ;
+    sh:focusNode _:thing ;
+    sh:resultSeverity ex:Notice ;
+    sh:sourceConstraintComponent sh:SPARQLConstraintComponent ;
+    sh:sourceConstraint ex:sparqlConstraint ;
+    sh:sourceShape ex:ThingShape ;
+    sh:resultMessage "Untagged message" .
+
+ex:NameShape sh:name "Name shape" .

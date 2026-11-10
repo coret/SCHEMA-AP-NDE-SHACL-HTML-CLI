@@ -1,0 +1,42 @@
+{
+  "name": "schema-ap-nde-shacl-html-cli",
+  "version": "0.1.0",
+  "description": "Validate RDF against the SCHEMA-AP-NDE SHACL shapes and write a self-contained, filterable HTML report",
+  "keywords": [
+    "shacl",
+    "schema-ap-nde",
+    "nde",
+    "linked-data",
+    "rdf",
+    "validation",
+    "cultural-heritage"
+  ],
+  "homepage": "https://github.com/coret/SCHEMA-AP-NDE-SHACL-HTML-CLI#readme",
+  "bugs": {
+    "url": "https://github.com/coret/SCHEMA-AP-NDE-SHACL-HTML-CLI/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coret/SCHEMA-AP-NDE-SHACL-HTML-CLI.git"
+  },
+  "license": "MIT",
+  "author": "Bob Coret",
+  "type": "module",
+  "bin": {
+    "schema-ap-nde-shacl-html-cli": "./cli.js"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "grapoi": "^1.3.0",
+    "n3": "^2.13.12",
+    "rdf-dereference": "^5.0.0",
+    "rdf-ext": "^2.6.0",
+    "rdf-parse": "^5.0.0",
+    "shacl-engine": "1.1.3"
+  }
+}

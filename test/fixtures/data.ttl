@@ -1,0 +1,14 @@
+@prefix schema: <https://schema.org/> .
+@prefix ex:     <http://example.org/> .
+
+ex:good a schema:CreativeWork ;
+    schema:name "A good work"@en ;
+    ex:note "not looked at by the shapes" ;
+    schema:associatedMedia ex:m1 .
+ex:m1 schema:contentUrl <https://example.org/m1.jpg> ;
+    schema:license <https://creativecommons.org/publicdomain/zero/1.0/> .
+
+ex:bad a schema:CreativeWork ;
+    ex:note "no name, and media with a literal URL and no license" ;
+    schema:associatedMedia ex:m2 .
+ex:m2 schema:contentUrl "https://example.org/m2.jpg" .

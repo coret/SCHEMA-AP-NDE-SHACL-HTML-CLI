@@ -1,0 +1,23 @@
+PREFIX rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX schema: <https://schema.org/>
+PREFIX sh:     <http://www.w3.org/ns/shacl#>
+
+[ rdf:type     sh:ValidationReport;
+  sh:conforms  false;
+  sh:result    [ rdf:type                      sh:ValidationResult;
+                 sh:focusNode                  <http://data.bibliotheken.nl/id/mh/m991006537959707151>;
+                 sh:resultMessage              "Voeg minimaal één weergeefbaar MediaObject toe als er media beschikbaar is."@nl , "At least one renderable MediaObject is required when media is available."@en;
+                 sh:resultPath                 schema:associatedMedia;
+                 sh:resultSeverity             sh:Warning;
+                 sh:sourceConstraintComponent  sh:QualifiedMinCountConstraintComponent;
+                 sh:sourceShape                _:b0
+               ];
+  sh:result    [ rdf:type                      sh:ValidationResult;
+                 sh:focusNode                  <http://data.bibliotheken.nl/id/mh/m991002605289707151>;
+                 sh:resultMessage              "Voeg minimaal één weergeefbaar MediaObject toe als er media beschikbaar is."@nl , "At least one renderable MediaObject is required when media is available."@en;
+                 sh:resultPath                 schema:associatedMedia;
+                 sh:resultSeverity             sh:Warning;
+                 sh:sourceConstraintComponent  sh:QualifiedMinCountConstraintComponent;
+                 sh:sourceShape                _:b0
+               ]
+] .

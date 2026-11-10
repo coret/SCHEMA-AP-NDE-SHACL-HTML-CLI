@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Generated reports: every run writes a new, timestamped file
+*.shacl.*.html
+*.shacl.html
+
+# Logs
+*.log
+npm-debug.log*
+
+# Test and coverage output
+coverage/
+.nyc_output/
+
+# Local environment and editor files
+.env
+.env.*
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db

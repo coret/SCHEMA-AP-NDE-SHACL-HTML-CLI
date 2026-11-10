@@ -1,0 +1,52 @@
+@prefix sh:     <http://www.w3.org/ns/shacl#> .
+@prefix schema: <https://schema.org/> .
+
+# A small shapes graph with the same structure as the SCHEMA-AP-NDE media shapes: the
+# property shapes of _:MediaObjectShape are evaluated nested (sh:or, sh:qualifiedValueShape)
+# and again directly through _:MediaValueShape. shacl-engine 1.1.3 loses the value-level
+# result of the second evaluation unless the fix in lib/validate.js is applied.
+
+_:WebUri a sh:NodeShape ;
+    sh:nodeKind sh:IRI ;
+    sh:pattern "^https?://" .
+
+_:ContentUrlUri
+    sh:path schema:contentUrl ;
+    sh:node _:WebUri ;
+    sh:message "Use a web URI"@en , "Gebruik een web-URI"@nl .
+
+_:LicenseRequired
+    sh:path schema:license ;
+    sh:minCount 1 ;
+    sh:message "Add a license"@en , "Voeg een licentie toe"@nl .
+
+_:MediaObjectShape a sh:NodeShape ;
+    sh:name "MediaObject" ;
+    sh:property _:ContentUrlUri , _:LicenseRequired .
+
+_:WorkShape a sh:NodeShape ;
+    sh:targetClass schema:CreativeWork ;
+    sh:name "CreativeWork" ;
+    sh:property [
+        sh:path schema:name ;
+        sh:minCount 1 ;
+        sh:message "Name is required"@en , "Naam is verplicht"@nl
+    ] , [
+        sh:path schema:associatedMedia ;
+        sh:or ( [ sh:node _:MediaObjectShape ] ) ;
+        sh:message "Use a valid MediaObject"@en , "Gebruik een geldig MediaObject"@nl
+    ] .
+
+_:WorkMediaCountShape a sh:NodeShape ;
+    sh:targetClass schema:CreativeWork ;
+    sh:property [
+        sh:path schema:associatedMedia ;
+        sh:qualifiedValueShape [ sh:node _:MediaObjectShape ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "Add at least one valid MediaObject"@en , "Voeg minimaal één geldig MediaObject toe"@nl
+    ] .
+
+_:MediaValueShape a sh:NodeShape ;
+    sh:targetObjectsOf schema:associatedMedia ;
+    sh:property _:LicenseRequired , _:ContentUrlUri .

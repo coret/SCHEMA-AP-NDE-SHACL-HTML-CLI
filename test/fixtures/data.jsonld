@@ -1,0 +1,22 @@
+{
+  "@context": { "@vocab": "https://schema.org/", "ex": "http://example.org/" },
+  "@graph": [
+    {
+      "@id": "ex:good",
+      "@type": "CreativeWork",
+      "name": { "@value": "A good work", "@language": "en" },
+      "ex:note": "not looked at by the shapes",
+      "associatedMedia": {
+        "@id": "ex:m1",
+        "contentUrl": { "@id": "https://example.org/m1.jpg" },
+        "license": { "@id": "https://creativecommons.org/publicdomain/zero/1.0/" }
+      }
+    },
+    {
+      "@id": "ex:bad",
+      "@type": "CreativeWork",
+      "ex:note": "no name, and media with a literal URL and no license",
+      "associatedMedia": { "@id": "ex:m2", "contentUrl": "https://example.org/m2.jpg" }
+    }
+  ]
+}
