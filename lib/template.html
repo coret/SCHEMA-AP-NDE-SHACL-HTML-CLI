@@ -240,7 +240,7 @@ tr.detail-row:hover > td { background: color-mix(in srgb, var(--bg) 60%, var(--s
 
     <section class="card" id="summary-card" aria-labelledby="summary-h">
       <div class="card-head">
-        <h2 id="summary-h">Errors</h2>
+        <h2 id="summary-h">Errors, warnings &amp; infos</h2>
         <span class="muted" id="summary-note"></span>
       </div>
       <div class="scroll" id="summary-scroll">
@@ -313,6 +313,10 @@ tr.detail-row:hover > td { background: color-mix(in srgb, var(--bg) 60%, var(--s
   // report keeps only a number of results per error.
   var GROUPS = (D.summary || []).map(function (g) { return { sev: g[0], msg: g[1], path: g[2], comp: g[3], n: g[4], nf: g[5] }; });
   var TOTAL = typeof META.total === 'number' ? META.total : R.length;
+  // The chips always show the totals per severity of the whole report, whatever is filtered,
+  // so they add up to the Results column of the summary table.
+  var SEV_TOTAL = {};
+  GROUPS.forEach(function (g) { SEV_TOTAL[g.sev] = (SEV_TOTAL[g.sev] || 0) + g.n; });
 
   function $(id) { return document.getElementById(id); }
 
@@ -651,13 +655,13 @@ tr.detail-row:hover > td { background: color-mix(in srgb, var(--bg) 60%, var(--s
       .forEach(function (i) {
         var on = st.sev.indexOf(i) >= 0;
         box.appendChild(el('button', {
-          type: 'button', class: 'chip ' + sevClass(i) + (counts.sev[i] ? '' : ' zero'), 'aria-pressed': on ? 'true' : 'false', title: DICT.severity[i].iri,
+          type: 'button', class: 'chip ' + sevClass(i) + (SEV_TOTAL[i] ? '' : ' zero'), 'aria-pressed': on ? 'true' : 'false', title: DICT.severity[i].iri,
           onclick: function () {
             st.sev = on ? st.sev.filter(function (v) { return v !== i; }) : st.sev.concat(i);
             st.page = 1;
             update();
           }
-        }, [DICT.severity[i].label + 's', el('b', null, fmt(counts.sev[i] || 0))])); // plural on the chips: Errors, Warnings, Infos
+        }, [DICT.severity[i].label + 's', el('b', null, fmt(SEV_TOTAL[i] || 0))])); // plural on the chips: Errors, Warnings, Infos
       });
   }
 
@@ -690,7 +694,7 @@ tr.detail-row:hover > td { background: color-mix(in srgb, var(--bg) 60%, var(--s
   function renderSummary() {
     if (!summary) buildSummary();
     $('summary-card').hidden = !TOTAL;
-    $('summary-note').textContent = plural(summary.length, 'distinct error') + ', select one to filter';
+    $('summary-note').textContent = plural(summary.length, 'distinct issue') + ', select one to filter';
     var body = $('summary').tBodies[0];
     body.textContent = '';
     summary.forEach(function (g) {

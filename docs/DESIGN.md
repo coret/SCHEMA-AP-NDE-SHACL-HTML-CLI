@@ -71,8 +71,10 @@ NODE_OPTIONS=--max-old-space-size=24000 node cli.js dump.nt.gz
   namespace, no node targeted by any shape ("Nothing was validated"), a shortened list.
 - Severity chips with counts and plural labels. `Errors` (`sh:Violation`), `Warnings` and
   `Infos` are always shown, also with a count of 0; a custom severity gets a chip when the shapes use it.
-  Select one or more to filter; none selected means all.
-- Errors table: one row per distinct combination of severity, message, path and
+  The chips always show the totals of the whole report, independent of the active filters,
+  so they add up to the Results column of the table below. Select one or more to filter;
+  none selected means all.
+- "Errors, warnings & infos" table: one row per distinct combination of severity, message, path and
   constraint component, with the number of results and of distinct focus nodes. Select a
   row to filter the results on that error, select it again to clear.
 - Filters on message, path and constraint component, plus a text search on focus node

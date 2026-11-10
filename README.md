@@ -141,8 +141,9 @@ kleine bestanden kun je het weglaten.
 ## Het rapport
 
 - **Chips per ernst**: Errors, Warnings en Infos, altijd alle drie, ook als de teller op 0
-  staat. Klik om te filteren.
-- **Fouten**: één regel per unieke fout (ernst, melding, pad, soort controle), met het
+  staat. De chips tonen altijd het totaal van het hele rapport en tellen dus op tot de
+  kolom Results in de tabel eronder. Klik om te filteren.
+- **Errors, warnings & infos**: één regel per unieke fout (ernst, melding, pad, soort controle), met het
   aantal meldingen en het aantal objecten waar het om gaat. Klik op een regel om de
   lijst eronder tot die fout te beperken.
 - **Filters** op melding, pad en soort controle, en een zoekveld op de URI van het
