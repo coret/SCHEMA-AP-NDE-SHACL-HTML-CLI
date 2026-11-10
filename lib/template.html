@@ -657,7 +657,7 @@ tr.detail-row:hover > td { background: color-mix(in srgb, var(--bg) 60%, var(--s
             st.page = 1;
             update();
           }
-        }, [DICT.severity[i].label, el('b', null, fmt(counts.sev[i] || 0))]));
+        }, [DICT.severity[i].label + 's', el('b', null, fmt(counts.sev[i] || 0))])); // plural on the chips: Errors, Warnings, Infos
       });
   }
 

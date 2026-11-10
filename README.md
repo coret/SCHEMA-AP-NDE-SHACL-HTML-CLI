@@ -140,7 +140,7 @@ kleine bestanden kun je het weglaten.
 
 ## Het rapport
 
-- **Chips per ernst**: Error, Warning en Info, altijd alle drie, ook als de teller op 0
+- **Chips per ernst**: Errors, Warnings en Infos, altijd alle drie, ook als de teller op 0
   staat. Klik om te filteren.
 - **Fouten**: één regel per unieke fout (ernst, melding, pad, soort controle), met het
   aantal meldingen en het aantal objecten waar het om gaat. Klik op een regel om de
