@@ -69,8 +69,8 @@ NODE_OPTIONS=--max-old-space-size=24000 node cli.js dump.nt.gz
   true and something was actually validated.
 - Notices when the outcome needs a caveat: data in the legacy `http://schema.org/`
   namespace, no node targeted by any shape ("Nothing was validated"), a shortened list.
-- Severity chips with counts. `Error` (`sh:Violation`), `Warning` and `Info` are always
-  shown, also with a count of 0; a custom severity gets a chip when the shapes use it.
+- Severity chips with counts and plural labels. `Errors` (`sh:Violation`), `Warnings` and
+  `Infos` are always shown, also with a count of 0; a custom severity gets a chip when the shapes use it.
   Select one or more to filter; none selected means all.
 - Errors table: one row per distinct combination of severity, message, path and
   constraint component, with the number of results and of distinct focus nodes. Select a
