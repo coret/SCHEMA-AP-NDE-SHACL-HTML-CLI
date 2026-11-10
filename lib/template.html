@@ -616,7 +616,10 @@ tr.detail-row:hover > td { background: color-mix(in srgb, var(--bg) 60%, var(--s
     var when = META.generated ? new Date(META.generated) : null;
     foot.appendChild(document.createTextNode(
       'Generated ' + (when && !isNaN(when) ? 'on ' + when.toLocaleString() + ' ' : '') +
-      (META.source ? 'from ' + META.source + ' ' : '') + 'by SCHEMA-AP-NDE-SHACL-HTML-CLI' +
+      (META.source ? 'from ' + META.source + ' ' : '') + 'by '));
+    foot.appendChild(el('a', { href: 'https://github.com/coret/SCHEMA-AP-NDE-SHACL-HTML-CLI', target: '_blank', rel: 'noopener noreferrer' },
+      'SCHEMA-AP-NDE-SHACL-HTML-CLI'));
+    foot.appendChild(document.createTextNode(
       (META.engine ? ' (' + META.engine + ')' : '') + '. ' +
       (META.shapes ? 'Shapes: ' + META.shapes.source + ', fetched ' + new Date(META.shapes.fetched).toLocaleString() +
         ', sha256 ' + META.shapes.sha256.slice(0, 12) + '. ' : '') + 'See '));
